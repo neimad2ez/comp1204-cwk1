@@ -21,3 +21,12 @@ File info:
 - world-50m.txt
 	This contains information used to draw the world map background in your storm plots. 
 	It is used by the plot-locations-on-map.gpi script.
+- create_csv.sh
+	This script generates a csv file in the required format with units under heading lines 
+	from kml files.
+	You can then run
+		./create_csv.sh storm_data.kml storm_data.csv
+	to create a formatted csv file with the data.
+- report.pdf
+	Exported pdf of the report template.
+
