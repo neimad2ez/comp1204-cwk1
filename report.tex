@@ -8,8 +8,8 @@
 
 %Importing fancy package
 \usepackage{fancyvrb}
-\usepackage{tcolorbox}
-\tcbuselibrary{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
 
@@ -86,9 +86,47 @@ rm minSeaLevelPres.csv
 \end{figure}
 \clearpage
 \section{Git Usage}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
-    title=create\_csv.sh, fonttitle=\bfseries, listing only, listing options={language=Python, basicstyle=\ttfamily}]
+\begin{tcolorbox}[enhanced, 
+    listing only,
+    title=Python Code for Plotting CSV Data,
+    fonttitle=\bfseries,
+    colback=white,
+    colframe=black!70,
+    listing options={
+      language=Python,
+      numbers=left, 
+      numberstyle=\tiny\color{gray},
+      breaklines=true, 
+      basicstyle=\ttfamily\small, 
+      columns=fullflexible,
+      keepspaces=true,
+      showstringspaces=true,
+    },]
     \begin{verbatim}
+        import pandas as pd
+        import matplotlib.pyplot as plt
+        import os
+        import glob
+        import math
+        user_key = 1773
+        
+        def plot_all_csv_pressure():
+            path = os.getcwd()
+            csv_files = glob.glob(os.path.join(path, '*.csv'))
+            
+            for f in csv_files:
+                storm = pd.read_csv(f)
+                storm['Pressure'].plot()
+                plt.show()
+        
+        def plot_all_csv_intensity():
+            path = os.getcwd()
+            csv_files = glob.glob(os.path.join(path, '*.csv'))
+            
+            for f in csv_files:
+                storm = pd.read_csv(f)
+                storm['Intensity'].plot()
+                plt.show()
     \end{verbatim}
 \end{tcolorbox}
 
