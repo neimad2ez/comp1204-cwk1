@@ -9,5 +9,3 @@ lon="$(cat $csv_input_path | grep "<lon>" | sed 's/.*<lon>//g' | sed 's/[</lon>]
 minSeaLevelPres="$(cat $csv_input_path | grep "<minSeaLevelPres>" | sed 's/.*<minSeaLevelPres>//g' | sed 's/[</minSeaLevelPres>]//g')"
 maxIntensity="$(cat $csv_input_path | grep "<intensity>" | sed 's/.*<intensity>//g' | sed 's/[</intensity>]//g')"
 paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") <(echo "$maxIntensity") >> $tmp_csv_output
-#NAME=${dtg}_${lat}_${lon}_${minSeaLevelPres}_${maxIntensity}
-#echo $NAME >> $tmp_csv_output
