@@ -6,6 +6,10 @@
 % Reduce the margin size, as they're quite big by default
 \usepackage[margin=1in]{geometry}
 
+%Importing algorithmic package
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
 \title{COMP1204: Data Management \\ Coursework One: Hurricane Monitoring }
 % Update these!
 \author{Damien Ta \\ 34830294}
@@ -21,7 +25,12 @@ As data scientists for the National Oceanographic and Atmospheric Administraiton
 tracking team. As a data scientist I have been tasked with extracting storm data from the tropical cyclone reports and producing
 maps of where the cyclones have taken place.
 \section{Create CSV Script}
-
+\begin{algorithm}
+    \caption{create\_csv.sh}
+    \begin{algorithmic}
+        \STATE \textbf{Input:} input\_file, \_file
+    \end{algorithmic}
+\end{algorithm}
 \section{Storm Plots}
 
 \section{Git usage}
