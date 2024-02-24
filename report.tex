@@ -6,9 +6,12 @@
 % Reduce the margin size, as they're quite big by default
 \usepackage[margin=1in]{geometry}
 
-%Importing algorithmic package
-\usepackage{algorithm}
-\usepackage{algorithmic}
+%Importing fancy package
+\usepackage{fancyvrb}
+\usepackage{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 
 \title{COMP1204: Data Management \\ Coursework One: Hurricane Monitoring }
 % Update these!
@@ -25,36 +28,69 @@ As data scientists for the National Oceanographic and Atmospheric Administraiton
 tracking team. As a data scientist I have been tasked with extracting storm data from the tropical cyclone reports and producing
 maps of where the cyclones have taken place.
 \section{Create CSV Script}
-\begin{algorithm}
-    \caption{create\_csv.sh}
-    \begin{algorithmic}
-        \STATE \textbf{Input:} input\_file, \_file
-    \end{algorithmic}
-\end{algorithm}
+Here's my script:
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=create\_csv.sh, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+    \begin{verbatim}
+#!/bin/bash
+csv_input_path=$1
+tmp_csv_output=$2
 
-\begin{verbatim}
-    #!/bin/bash
-    csv_input_path=$1
-    tmp_csv_output=$2
-    
-    echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
-    dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
-    grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
-    grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
-    grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
-    grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | sed 's/[</intensity>]//g' > intensity.csv
-    lat="$(sed "s/$/ N/" lat.csv)"
-    lon="$(sed "s/$/ W/" lon.csv)"
-    minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"
-    maxIntensity="$(sed "s/$/ knots/" intensity.csv)"
-    paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") <(echo "$maxIntensity") >> $tmp_csv_output
-    rm lat.csv
-    rm lon.csv
-    rm minSeaLevelPres.csv
-    rm intensity.csv
-\end{verbatim}
+#I used \ to continue command on next line
+
+echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
+dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
+
+grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
+grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
+grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | \
+sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
+grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | \ 
+sed 's/[</intensity>]//g' > intensity.csv
+
+lat="$(sed "s/$/ N/" lat.csv)"
+lon="$(sed "s/$/ W/" lon.csv)"
+minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"
+maxIntensity="$(sed "s/$/ knots/" intensity.csv)"
+
+paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") \
+<(echo "$maxIntensity") >> $tmp_csv_output
+rm lat.csv
+rm lon.csv
+rm minSeaLevelPres.csv
+    \end{verbatim}
+\end{tcolorbox}
+
+
+
 \section{Storm Plots}
+\begin{figure}[htbp]
+    \centering
+\includegraphics{al112020.png}
+\caption{al112020.kml}
+\label{fig:al112020}
+\end{figure}
 
-\section{Git usage}
+\begin{figure}[htbp]
+    \centering
+\includegraphics{al012020.png}
+\caption{al012020.kml}
+\label{fig:al012020}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+\includegraphics{al102020.png}
+\caption{al102020.kml}
+\label{fig:al102020}
+\end{figure}
+\clearpage
+\section{Git Usage}
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=create\_csv.sh, fonttitle=\bfseries, listing only, listing options={language=Python, basicstyle=\ttfamily}]
+    \begin{verbatim}
+    \end{verbatim}
+\end{tcolorbox}
+
 
 \end{document}
