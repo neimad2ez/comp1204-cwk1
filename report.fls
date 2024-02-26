@@ -204,6 +204,10 @@ INPUT c:/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.cod
 INPUT c:/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.tex
 OUTPUT report.pdf
 INPUT c:/texlive/2023/texmf-dist/tex/latex/tcolorbox/tcbposter.code.tex
+INPUT c:/texlive/2023/texmf-dist/tex/latex/blindtext/blindtext.sty
+INPUT c:/texlive/2023/texmf-dist/tex/latex/blindtext/blindtext.sty
+INPUT c:/texlive/2023/texmf-dist/tex/latex/tools/xspace.sty
+INPUT c:/texlive/2023/texmf-dist/tex/latex/tools/xspace.sty
 INPUT c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT ./report.aux
@@ -238,11 +242,12 @@ INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
-INPUT ./images/al112020.png
-INPUT ./images/al112020.png
-INPUT ./images/al112020.png
-INPUT ./images/al112020.png
 INPUT c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT ./images/al112020.png
+INPUT ./images/al112020.png
+INPUT ./images/al112020.png
+INPUT ./images/al112020.png
 INPUT ./images/al012020.png
 INPUT ./images/al012020.png
 INPUT ./images/al012020.png

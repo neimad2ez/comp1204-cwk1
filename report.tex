@@ -12,6 +12,7 @@
 \usepackage{xcolor}
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
+\usepackage{blindtext}
 
 \title{COMP1204: Data Management \\ Coursework One: Hurricane Monitoring }
 % Update these!
@@ -40,7 +41,6 @@ tmp_csv_output=$2
 
 echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
 dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
-
 grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
 grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
 grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | \
@@ -55,15 +55,57 @@ maxIntensity="$(sed "s/$/ knots/" intensity.csv)"
 
 paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") \
 <(echo "$maxIntensity") >> $tmp_csv_output
+
 rm lat.csv
 rm lon.csv
 rm minSeaLevelPres.csv
+rm intensity.csv
     \end{verbatim}
 \end{tcolorbox}
+I will now explain my code in small boxes each in its own independent sections:
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=\#!/bin/bash, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+    \begin{verbatim}
+#!/bin/bash
+csv_input_path=$1
+tmp_csv_output=$2
+
+#!/bin/bash 
+tells the terminal that when you run the script it should use bash to execute it
+csv_input_path=$1
+tmp_csv_output=$2
+These two lines of code allow inputs to be enntered into the script
+    \end{verbatim}
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=\#!/bin/bash, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+    \begin{verbatim}
+echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
+dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
+grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
+grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
+grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | \
+sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
+grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | \ 
+sed 's/[</intensity>]//g' > intensity.csv
+
+echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
+This command prints the tag headers
+dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
+grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
+grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
+grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | \
+sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
+grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | \ 
+sed 's/[</intensity>]//g' > intensity.csv
+    \end{verbatim}
+\end{tcolorbox}
+\clearpage
 
 
 
 \section{Storm Plots}
+\subsection{Storm Plot 1}
 \begin{figure}[htbp]
     \centering
 \includegraphics{al112020.png}
@@ -71,12 +113,18 @@ rm minSeaLevelPres.csv
 \label{fig:al112020}
 \end{figure}
 
+\clearpage
+\subsection{Storm Plot 2}
+
 \begin{figure}[htbp]
     \centering
 \includegraphics{al012020.png}
 \caption{al012020.kml}
 \label{fig:al012020}
 \end{figure}
+
+\clearpage
+\subsection{Storm Plot 3}
 
 \begin{figure}[htbp]
     \centering
