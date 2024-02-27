@@ -1,0 +1,185 @@
+commit 8b1d2466179ee3a0535142ce6ed17e87b13b60ab
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Mon Feb 26 18:26:25 2024 +0000
+
+    Explained first couple of lines to my Create CSV Script
+
+commit 0a7eeaa353f950089f231789250f12ef76cade54
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 20:43:12 2024 +0000
+
+    Made a start on Git Usage section
+
+commit 5b8247f69ac35ac19a36c2e77f50851c27bc2a91
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 20:04:52 2024 +0000
+
+    Created 3 csv files and their respective images. Put in the storm plot section of LaTeX report
+
+commit 326cd160d49eb8ffd59ab4f78601e5b0dc74c145
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 18:10:37 2024 +0000
+
+    Restored code from local backup after reverting and resolving conflcits
+
+commit eb977812240085895c9e22e86fd015cc6531224f
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 18:06:09 2024 +0000
+
+    Cleaned up my create_csv.sh file
+
+commit eaf69f6711618c4e0452733c54d8a85733a04e96
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 18:04:20 2024 +0000
+
+    Started LaTeX report, started introduction and CSV script
+
+commit 25f61f8a690100425d7c511c2744a9950e47733d
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 18:04:19 2024 +0000
+
+    Started LaTeX report, started introduction and CSV script
+
+commit 3226f0ddcf0b8ad186c91abfd0aced6b15773ca1
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 17:43:01 2024 +0000
+
+    Updated readme.txt
+
+commit 9c1dc07b3f6718e052e21245fefc5622b75bea20
+Merge: 8da05ea 6bfd745
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 17:42:32 2024 +0000
+
+    Merge branch 'python-addon'
+
+commit 8da05ea8928f627608d20bd6edfd53e50de06c85
+Author: Damien <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 17:40:44 2024 +0000
+
+    Initial creation of python-plot-script from working branch
+
+commit 6bfd745ab1855b82286bdb468bc59a16fa6823a6
+Author: Damien <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 17:40:42 2024 +0000
+
+    Added new function to the python-plot-script from python-addon
+
+commit 7666dd676b19f15589962bdf21d4dbfa99cb4651
+Author: Damien <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 17:40:39 2024 +0000
+
+    Cleaning old scripts
+
+commit 345f39a94edf3da7fc166df4546014197a2708bc
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 17:39:01 2024 +0000
+
+    Revert "Finished create_csv.sh added functionality to display units"
+    
+    This reverts commit 9bccbdda8323d0dbb0c9d00b1056f5723968679e.
+
+commit 2119e71a25edff3c59a1d3d63e1b4230ca9238de
+Author: Damien <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 17:31:20 2024 +0000
+
+    sh: line 1: q: command not found
+    
+    This reverts commit 9bccbdda8323d0dbb0c9d00b1056f5723968679e.
+
+commit 516c78039f0f368d2b5d1e191a58d7d6b9ff9a98
+Author: Damien <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 17:19:59 2024 +0000
+
+    Removed readme.txt
+
+commit c31956ebf8752292f1d137d75952ce479afbd68c
+Author: Damien <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 17:17:56 2024 +0000
+
+    Removed python-addon
+
+commit 714b4bdab760a22642fc5f2a7c82d85ffba00d72
+Author: Damien <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 17:16:14 2024 +0000
+
+    Changes to readme.txt
+
+commit 40362399e0bcb472fdd6eda25ea539ef4e75179c
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Sat Feb 24 17:12:26 2024 +0000
+
+    Started LaTeX report, started Introduction
+
+commit 09c291fab919eaa75e564a3c5273e213b0f2012f
+Merge: c97fdbf 5c81aea
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Thu Feb 22 17:22:46 2024 +0000
+
+    Merge branch 'python-addon'
+
+commit c97fdbfbccbe562334f57aa8bba5496a50b84ad4
+Author: Damien <dt2g23@soton.ac.uk>
+Date:   Thu Feb 22 17:08:57 2024 +0000
+
+    Initial creation of python-plot-script from working branch
+
+commit 5c81aeaa77fce3f3e488da99c9df96fb2951371a
+Author: Damien <dt2g23@soton.ac.uk>
+Date:   Thu Feb 22 17:08:53 2024 +0000
+
+    Added new function to the python-plot-script from python-addon
+
+commit 3771b8ce665dfc8254d8bcf60c39b706fdb6a139
+Author: Damien <dt2g23@soton.ac.uk>
+Date:   Thu Feb 22 17:08:47 2024 +0000
+
+    Cleaning old scripts
+
+commit d26995ea78a0075303f85dbc61e0426f62e09061
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Thu Feb 22 17:07:48 2024 +0000
+
+    Ran the file before setting username and email, conflict didn't work, now works
+
+commit 564be4caed5ff8a55c220e44e5d6f2e4483715c9
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Thu Feb 22 16:58:58 2024 +0000
+
+    Updated readme.txt and created test image for al112020.kml
+
+commit 9bccbdda8323d0dbb0c9d00b1056f5723968679e
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Thu Feb 22 16:46:59 2024 +0000
+
+    Finished create_csv.sh added functionality to display units
+
+commit 94372ddd46378d20a8f466b30faba9799728f8ae
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Thu Feb 22 16:19:43 2024 +0000
+
+    Completed csv code but without units
+
+commit 2de0d777e8d54f379b712729384c1007b42670be
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Thu Feb 22 10:33:31 2024 +0000
+
+    Much closer to the final product but I need to fix white spaces in my code, has to do with my sed command
+
+commit 3e7813bf50715f9a62c1750384ebe9c8b178fd65
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Tue Feb 20 17:34:24 2024 +0000
+
+    Extracted data required but I haven't sorted it
+
+commit eded9e8d8e2b97644fd3e436c064894ea648ead6
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Sun Feb 18 19:32:56 2024 +0000
+
+    Initial commit with files provided
+
+commit 8a2d0a71b07dbfec3891f464cc4d02b842c0708b
+Author: dt2g23 <dt2g23@soton.ac.uk>
+Date:   Sun Feb 18 19:25:10 2024 +0000
+
+    Upload New File

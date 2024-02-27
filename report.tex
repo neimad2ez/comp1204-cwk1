@@ -13,6 +13,8 @@
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
 \usepackage{blindtext}
+\usepackage{soul}
+\usepackage[T1]{fontenc}
 
 \title{COMP1204: Data Management \\ Coursework One: Hurricane Monitoring }
 % Update these!
@@ -37,15 +39,13 @@ Here's my script:
 csv_input_path=$1
 tmp_csv_output=$2
 
-#I used \ to continue command on next line
-
 echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
 dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
 grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
 grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
-grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | \
+grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | /
 sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
-grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | \ 
+grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | / 
 sed 's/[</intensity>]//g' > intensity.csv
 
 lat="$(sed "s/$/ N/" lat.csv)"
@@ -60,45 +60,71 @@ rm lat.csv
 rm lon.csv
 rm minSeaLevelPres.csv
 rm intensity.csv
+
+#I used / to continue command on next line
     \end{verbatim}
 \end{tcolorbox}
 I will now explain my code in small boxes each in its own independent sections:
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
-    title=\#!/bin/bash, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+    title=First part of the code, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+
     \begin{verbatim}
 #!/bin/bash
 csv_input_path=$1
 tmp_csv_output=$2
-
-#!/bin/bash 
-tells the terminal that when you run the script it should use bash to execute it
-csv_input_path=$1
-tmp_csv_output=$2
-These two lines of code allow inputs to be enntered into the script
     \end{verbatim}
+\hl{\#\!/bin/bash}\newline
+tells the terminal that when you run the script it should use bash to execute it\newline
+\hl{csv\_input\_path=\$1}\newline
+\hl{tmp\_csv\_output=\$2}\newline
+These two lines of code allow inputs to be enntered into the script
 \end{tcolorbox}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
-    title=\#!/bin/bash, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+    title=Second part of the code, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
-echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
-dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
-grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
-grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
-grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | \
-sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
-grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | \ 
-sed 's/[</intensity>]//g' > intensity.csv
-
-echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
-This command prints the tag headers
-dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
-grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
-grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
-grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | \
-sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
-grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | \ 
-sed 's/[</intensity>]//g' > intensity.csv
+1 echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
+2 dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
+3 grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
+4 grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
+5 grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | \
+6 sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
+7 grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | \ 
+8 sed 's/[</intensity>]//g' > intensity.csv
     \end{verbatim}
+\hl{echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > \$tmp\_csv\_output}\newline
+This command prints the tag headers\newline
+\hl{dtg="\$(grep -R "<dtg>" \$csv\_input\_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"}\newline
+The code creates variable dtg, we grep the kml file inputted at \$1 and search recursively for\newline
+keyword <dtg>. The sed 's/.*<dtg>//g' command would replace any character and its occurences \newline
+with an empty space including anything before the pattern.\newline
+the sed 's/[</dtg>]//g' command would replace any characters between the [], so < / d t g >\newline
+to an empty character and the g stands for global.\newline
+\hl{grep -R "<lat>" \$csv\_input\_path | sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv}\newline
+grep recursively keyword <lat> from the kml file inputted\newline
+The sed 's/.*<dtg>//g' command would replace any character and its occurences \newline
+with an empty space including anything before the pattern.\newline
+The sed 's/[</lat>]//g' command would replace any characters between the [ ], so < / l a t >\newline
+The outcome is then appended to a file called lat.csv for later use. This same code is then run\newline
+on the rest of the tag headers Longitude, MinSeaLevelPressure and MaxIntensity.\newline
+
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=Third part of the code, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+    \begin{verbatim}
+lat="$(sed "s/$/ N/" lat.csv)"
+lon="$(sed "s/$/ W/" lon.csv)"
+minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"
+maxIntensity="$(sed "s/$/ knots/" intensity.csv)"
+    \end{verbatim}
+    \hl{lat="$(sed "s/$/ N/" lat.csv)"}\newline
+    New variable lat is created which uses sed and adds on each line (\$) " N" from file lat.csv\newline
+    This is then run on each line of code for longitude, minSeaLevelPres and maxIntensity for their\newline
+    respective unit of measure.\newline
+    \hl{lon="$(sed "s/$/ W/" lon.csv)"}\newline
+    \hl{minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"}\newline
+    \hl{maxIntensity="$(sed "s/$/ knots/" intensity.csv)"}\newline
 \end{tcolorbox}
 \clearpage
 
