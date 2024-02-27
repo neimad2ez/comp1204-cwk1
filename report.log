@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.18)  27 FEB 2024 16:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.18)  27 FEB 2024 18:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -598,50 +598,50 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 37
  (c:/texlive/2023/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-Overfull \hbox (11.08745pt too wide) in paragraph at lines 42--42
-[]\T1/cmtt/m/n/10 echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output[] 
- []
-
-
-Overfull \hbox (0.59001pt too wide) in paragraph at lines 45--45
-[]\T1/cmtt/m/n/10 grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv[] 
- []
-
-
-Overfull \hbox (5.83873pt too wide) in paragraph at lines 56--56
-[]\T1/cmtt/m/n/10 paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") \[] 
+Overfull \hbox (14.45375pt too wide) in paragraph at lines 65--65
+[] 
  []
 
 [1
 
 {c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
-Overfull \hbox (7.13113pt too wide) in paragraph at lines 86--86
+Overfull \hbox (14.45375pt too wide) in paragraph at lines 80--80
+[] 
+ []
+
+
+Overfull \hbox (7.13113pt too wide) in paragraph at lines 84--84
 []\T1/cmtt/m/n/10 1 echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--110
+Underfull \hbox (badness 10000) in paragraph at lines 93--108
 
  []
 
 
-Overfull \hbox (14.45375pt too wide) in paragraph at lines 112--112
+Overfull \hbox (14.45375pt too wide) in paragraph at lines 110--110
 [] 
  []
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 122--129
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--124
 
  []
 
-[3]
+
+Overfull \hbox (16.33617pt too wide) in paragraph at lines 128--128
+[]\T1/cmtt/m/n/10 1 paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") / 
+ []
+
+[2] [3]
 <./images/al112020.png, id=59, 481.8pt x 361.35pt>
 File: ./images/al112020.png Graphic file (type png)
 <use ./images/al112020.png>
-Package pdftex.def Info: ./images/al112020.png  used on input line 138.
+Package pdftex.def Info: ./images/al112020.png  used on input line 142.
 (pdftex.def)             Requested size: 481.79881pt x 361.34912pt.
 
-Overfull \hbox (12.0438pt too wide) in paragraph at lines 138--139
+Overfull \hbox (12.0438pt too wide) in paragraph at lines 142--143
  [][] 
  []
 
@@ -651,10 +651,10 @@ Overfull \hbox (12.0438pt too wide) in paragraph at lines 138--139
 <./images/al012020.png, id=65, 481.8pt x 361.35pt>
 File: ./images/al012020.png Graphic file (type png)
 <use ./images/al012020.png>
-Package pdftex.def Info: ./images/al012020.png  used on input line 148.
+Package pdftex.def Info: ./images/al012020.png  used on input line 152.
 (pdftex.def)             Requested size: 481.79881pt x 361.34912pt.
 
-Overfull \hbox (12.0438pt too wide) in paragraph at lines 148--149
+Overfull \hbox (12.0438pt too wide) in paragraph at lines 152--153
  [][] 
  []
 
@@ -664,10 +664,10 @@ Overfull \hbox (12.0438pt too wide) in paragraph at lines 148--149
 <./images/al102020.png, id=70, 481.8pt x 361.35pt>
 File: ./images/al102020.png Graphic file (type png)
 <use ./images/al102020.png>
-Package pdftex.def Info: ./images/al102020.png  used on input line 158.
+Package pdftex.def Info: ./images/al102020.png  used on input line 162.
 (pdftex.def)             Requested size: 481.79881pt x 361.34912pt.
 
-Overfull \hbox (12.0438pt too wide) in paragraph at lines 158--159
+Overfull \hbox (12.0438pt too wide) in paragraph at lines 162--163
  [][] 
  []
 
@@ -682,15 +682,15 @@ L3 programming layer <2024-02-13>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 21743 strings out of 474142
- 465512 string characters out of 5748646
- 1942998 words of memory out of 5000000
- 43702 multiletter control sequences out of 15000+600000
+ 21747 strings out of 474142
+ 465598 string characters out of 5748646
+ 1943998 words of memory out of 5000000
+ 43706 multiletter control sequences out of 15000+600000
  567636 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  101i,8n,107p,506b,873s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on report.pdf (7 pages, 197951 bytes).
+Output written on report.pdf (7 pages, 198267 bytes).
 PDF statistics:
  119 PDF objects out of 1000 (max. 8388607)
  61 compressed objects within 1 object stream

@@ -33,7 +33,7 @@ maps of where the cyclones have taken place.
 \section{Create CSV Script}
 Here's my script:
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
-    title=create\_csv.sh, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+    title=create\_csv.sh, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
 #!/bin/bash
 csv_input_path=$1
@@ -60,18 +60,17 @@ rm lat.csv
 rm lon.csv
 rm minSeaLevelPres.csv
 rm intensity.csv
-
 #I used / to continue command on next line
     \end{verbatim}
 \end{tcolorbox}
 I will now explain my code in small boxes each in its own independent sections:
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
-    title=First part of the code, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+    title=First part of the code, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 
     \begin{verbatim}
-#!/bin/bash
-csv_input_path=$1
-tmp_csv_output=$2
+1 #!/bin/bash
+2 csv_input_path=$1
+3 tmp_csv_output=$2
     \end{verbatim}
 \hl{\#\!/bin/bash}\newline
 tells the terminal that when you run the script it should use bash to execute it\newline
@@ -113,18 +112,25 @@ on the rest of the tag headers Longitude, MinSeaLevelPressure and MaxIntensity.\
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=Third part of the code, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
-lat="$(sed "s/$/ N/" lat.csv)"
-lon="$(sed "s/$/ W/" lon.csv)"
-minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"
-maxIntensity="$(sed "s/$/ knots/" intensity.csv)"
+1 lat="$(sed "s/$/ N/" lat.csv)"
+2 lon="$(sed "s/$/ W/" lon.csv)"
+3 minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"
+4 maxIntensity="$(sed "s/$/ knots/" intensity.csv)"
     \end{verbatim}
     \hl{lat="$(sed "s/$/ N/" lat.csv)"}\newline
     New variable lat is created which uses sed and adds on each line (\$) " N" from file lat.csv\newline
     This is then run on each line of code for longitude, minSeaLevelPres and maxIntensity for their\newline
     respective unit of measure.\newline
-    \hl{lon="$(sed "s/$/ W/" lon.csv)"}\newline
-    \hl{minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"}\newline
-    \hl{maxIntensity="$(sed "s/$/ knots/" intensity.csv)"}\newline
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=Fourth part of the code, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+    \begin{verbatim}
+1 paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") /
+2 <(echo "$maxIntensity") >> $tmp_csv_output
+    \end{verbatim}
+\hl{paste -d',' <(echo "\$dtg") <(echo "\$lat") <(echo "\$lon") <(echo "\$minSeaLevelPres") /}\newline
+\hl{<(echo "\$maxIntensity") >> \$tmp\_csv\_output}
+
 \end{tcolorbox}
 \clearpage
 
