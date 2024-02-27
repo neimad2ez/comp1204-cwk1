@@ -30,37 +30,38 @@
 As data scientists for the National Oceanographic and Atmospheric Administraiton Centre, I was assigned to the tropical cyclone
 tracking team. As a data scientist I have been tasked with extracting storm data from the tropical cyclone reports and producing
 maps of where the cyclones have taken place.
+\clearpage
 \section{Create CSV Script}
 Here's my script:
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=create\_csv.sh, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
-#!/bin/bash
-csv_input_path=$1
-tmp_csv_output=$2
-
-echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
-dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
-grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
-grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
-grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | /
-sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
-grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | / 
-sed 's/[</intensity>]//g' > intensity.csv
-
-lat="$(sed "s/$/ N/" lat.csv)"
-lon="$(sed "s/$/ W/" lon.csv)"
-minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"
-maxIntensity="$(sed "s/$/ knots/" intensity.csv)"
-
-paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") \
-<(echo "$maxIntensity") >> $tmp_csv_output
-
-rm lat.csv
-rm lon.csv
-rm minSeaLevelPres.csv
-rm intensity.csv
-#I used / to continue command on next line
+1  #!/bin/bash
+2  csv_input_path=$1
+3  tmp_csv_output=$2
+4
+5  echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
+6  dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
+7  grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
+8  grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
+9  grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | /
+10 sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
+11 grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | / 
+12 sed 's/[</intensity>]//g' > intensity.csv
+13 
+14 lat="$(sed "s/$/ N/" lat.csv)"
+15 lon="$(sed "s/$/ W/" lon.csv)"
+16 minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"
+17 maxIntensity="$(sed "s/$/ knots/" intensity.csv)"
+18
+19 paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") \
+20 <(echo "$maxIntensity") >> $tmp_csv_output
+21
+22 rm lat.csv
+23 rm lon.csv
+24 rm minSeaLevelPres.csv
+25 rm intensity.csv
+26 #I used / to continue command on next line
     \end{verbatim}
 \end{tcolorbox}
 I will now explain my code in small boxes each in its own independent sections:
@@ -81,14 +82,14 @@ These two lines of code allow inputs to be enntered into the script
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=Second part of the code, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
-1 echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
-2 dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
-3 grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
-4 grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
-5 grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | \
-6 sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
-7 grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | \ 
-8 sed 's/[</intensity>]//g' > intensity.csv
+5  echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
+6  dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
+7  grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
+8  grep -R "<lon>" $csv_input_path | sed 's/.*<lon>//g' | sed 's/[</lon>]//g' > lon.csv
+9  grep -R "<minSeaLevelPres>" $csv_input_path | sed 's/.*<minSeaLevelPres>//g' | \
+10 sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
+11 grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | \ 
+12 sed 's/[</intensity>]//g' > intensity.csv
     \end{verbatim}
 \hl{echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > \$tmp\_csv\_output}\newline
 This command prints the tag headers\newline
@@ -112,25 +113,40 @@ on the rest of the tag headers Longitude, MinSeaLevelPressure and MaxIntensity.\
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=Third part of the code, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
-1 lat="$(sed "s/$/ N/" lat.csv)"
-2 lon="$(sed "s/$/ W/" lon.csv)"
-3 minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"
-4 maxIntensity="$(sed "s/$/ knots/" intensity.csv)"
+14 lat="$(sed "s/$/ N/" lat.csv)"
+15 lon="$(sed "s/$/ W/" lon.csv)"
+16 minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"
+17 maxIntensity="$(sed "s/$/ knots/" intensity.csv)"
     \end{verbatim}
     \hl{lat="$(sed "s/$/ N/" lat.csv)"}\newline
     New variable lat is created which uses sed and adds on each line (\$) " N" from file lat.csv\newline
     This is then run on each line of code for longitude, minSeaLevelPres and maxIntensity for their\newline
     respective unit of measure.\newline
 \end{tcolorbox}
+
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=Fourth part of the code, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
-1 paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") /
-2 <(echo "$maxIntensity") >> $tmp_csv_output
+19 paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") /
+20 <(echo "$maxIntensity") >> $tmp_csv_output
     \end{verbatim}
 \hl{paste -d',' <(echo "\$dtg") <(echo "\$lat") <(echo "\$lon") <(echo "\$minSeaLevelPres") /}\newline
-\hl{<(echo "\$maxIntensity") >> \$tmp\_csv\_output}
+\hl{<(echo "\$maxIntensity") > > \$tmp\_csv\_output}\newline
+This code concatenates the variables we created earlier into the file at \$2.\newline
+-d',' would add delimiter , after each of the inputs. The < allows you to use an output\newline
+of a command as if it were a file.
+\end{tcolorbox}
 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=Last part of the code, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+    \begin{verbatim}
+22 rm lat.csv
+23 rm lon.csv
+24 rm minSeaLevelPres.csv
+25 rm intensity.csv
+    \end{verbatim}
+\hl{rm lat.csv}\newline
+rm would remove the file from the current directory. It does this for all temporary files created.
 \end{tcolorbox}
 \clearpage
 
@@ -166,6 +182,55 @@ on the rest of the tag headers Longitude, MinSeaLevelPressure and MaxIntensity.\
 \end{figure}
 \clearpage
 \section{Git Usage}
+
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=Run Conflict Script, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+./conflict-script.sh
+\end{verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=Git Merge, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+git merge
+\end{verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=Git Branch, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+git branch
+\end{verbatim}
+I used git branch to check
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=Resolving Conflict, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+    I used text editor in VS Code to resolve the conflict.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=Git Add, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+git add
+\end{verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=Git Merge, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+git merge
+\end{verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=Git Push, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+git push
+\end{verbatim}
+\end{tcolorbox}
+
 \begin{tcolorbox}[enhanced, 
     listing only,
     title=Python Code for Plotting CSV Data,
