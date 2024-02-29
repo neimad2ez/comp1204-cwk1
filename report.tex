@@ -32,8 +32,14 @@ tracking team. As a data scientist I have been tasked with extracting storm data
 maps of where the cyclones have taken place.
 \clearpage
 \section{Create CSV Script}
+\subsection{Introduction}
+I was tasked with extracting useful data from a set of hurrican reports.
+The reports contained lots of information and I coded the \textbf{create\_csv.sh}
+script to extract the important information from the reports.
+The important information that I extracted included \textbf{Timestamp, Latitude,
+Longitude, Minimum Sea Level Pressure and MaxIntensity.}
 \subsection{How to run script}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     title=Script to run create\_csv.sh, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \hl{./create\_csv.sh <input\_kml\_file> <output\_csv\_file>}
 \begin{verbatim}
@@ -42,7 +48,7 @@ header tag data. The command takes extracted data and saves it to a CSV file.
 \end{verbatim}
 \end{tcolorbox}
 \subsection{Full Script}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     title=create\_csv.sh, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
 1  #!/bin/bash
@@ -78,7 +84,7 @@ header tag data. The command takes extracted data and saves it to a CSV file.
 \end{center}
 \subsection{Script Breakdown}
 \subsubsection{Bash Initialization and Passing Arguements into a variable}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     title=Bash Initialization and Passing Arguements into a variable, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
 1 #!/bin/bash
@@ -92,7 +98,7 @@ tells the terminal that when you run the script it should use bash to execute it
 These two lines of code allow inputs to be enntered into the script
 \end{tcolorbox}
 \subsubsection{Using grep and sed to filter data of tag headers}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     title=Using grep and sed to filter data of tag headers, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
 5  echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
@@ -121,8 +127,8 @@ The outcome is then appended to a file called lat.csv for later use. This same c
 on the rest of the tag headers Longitude, MinSeaLevelPressure and MaxIntensity.\newline
 \end{tcolorbox}
 \subsubsection{Adding units to the end of certain tag headers}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
-    title=Adding units to the end of certain tag headers, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+    title=Adding units to the end of certain tag headers, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
 14 lat="$(sed "s/$/ N/" lat.csv)"
 15 lon="$(sed "s/$/ W/" lon.csv)"
@@ -135,8 +141,8 @@ on the rest of the tag headers Longitude, MinSeaLevelPressure and MaxIntensity.\
     respective unit of measure.\newline
 \end{tcolorbox}
 \subsubsection{Outputting results to file}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
-    title=Outputting results to file, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+    title=Outputting results to file, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
 19 paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") /
 20 <(echo "$maxIntensity") >> $tmp_csv_output
@@ -148,8 +154,8 @@ This code concatenates the variables we created earlier into the file at \$2.\ne
 of a command as if it were a file.
 \end{tcolorbox}
 \subsubsection{Removing temporary files from directory}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
-    title=Removing temporary files from directory, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+    title=Removing temporary files from directory, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
 22 rm lat.csv
 23 rm lon.csv
@@ -201,7 +207,7 @@ I was required to resolve a git conflict that was caused by running the command 
 a conflict was created due to the \textbf{python-plot-script.py} file being in two different branches.
 \subsection{How to run the conflict script}
 The command below ran the script and created a new branch called python-addon and added a file called python-plot-script.py.
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 ./conflict-script.sh
@@ -211,7 +217,7 @@ The command below ran the script and created a new branch called python-addon an
 \subsubsection{Check currrent branch}
 First thing I did, was check to see if I was on correct branch and to see if conflict script actually ran
 I saw that \textbf{python-addon} was one of the branches meaning the conflict script ran.
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 git branch
@@ -220,7 +226,7 @@ git branch
 \subsubsection{Merge the python-addon branch to main branch}
 As the conflict script has already run, we were tasked with merging the \textbf{python-addon} branch to the main
 branch. We did this using the command below. However, when we attempted to merge the two branches a conflict occured.
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 git merge python-addon
@@ -234,16 +240,17 @@ wrote it as fr. I picked the correct function and moved on. Lastly, the last err
 was missing a whole function called \textbf{plot\_all\_csv\_intensity()} which I added to the combined script.
 \subsubsection{Adding resolved file}
 After resolving the conflict, I used the command below to add a change in the working directory to the staging area.
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 git add python-plot-script.py
 \end{verbatim}
+\clearpage
 \end{tcolorbox}
 \subsubsection{Commititting the changes}
 Committing the changes would save the changes to the local repository. I committed this with an appopriate message about how the
 branches have been merged.
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 git commit -am "Merge branch 'python-addon'"
@@ -251,55 +258,41 @@ git commit -am "Merge branch 'python-addon'"
 \end{tcolorbox}
 \subsubsection{Pushing Changes to Remote Repository}
 I uploaded my local repository content to the remote repository 
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 git push origin main
 \end{verbatim}
 \end{tcolorbox}
 \subsection{Final Merged Script}
-\begin{tcolorbox}[enhanced, 
-    listing only,
-    title=python-plot-script.py,
-    fonttitle=\bfseries,
-    colback=white,
-    colframe=black!70,
-    listing options={
-      language=Python,
-      numbers=left, 
-      numberstyle=\tiny\color{gray},
-      breaklines=true, 
-      basicstyle=\ttfamily\small, 
-      columns=fullflexible,
-      keepspaces=true,
-      showstringspaces=true,
-    },]
-    \begin{verbatim}
-        import pandas as pd
-        import matplotlib.pyplot as plt
-        import os
-        import glob
-        import math
-        user_key = 1773
-        
-        def plot_all_csv_pressure():
-            path = os.getcwd()
-            csv_files = glob.glob(os.path.join(path, '*.csv'))
-            
-            for f in csv_files:
-                storm = pd.read_csv(f)
-                storm['Pressure'].plot()
-                plt.show()
-        
-        def plot_all_csv_intensity():
-            path = os.getcwd()
-            csv_files = glob.glob(os.path.join(path, '*.csv'))
-            
-            for f in csv_files:
-                storm = pd.read_csv(f)
-                storm['Intensity'].plot()
-                plt.show()
-    \end{verbatim}
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+    title=python-plot-script.py, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+1  import pandas as pd
+2  import matplotlib.pyplot as plt
+3  import os
+4  import glob
+5  import math
+6  user_key = 1773
+7   
+8  def plot_all_csv_pressure():
+9      path = os.getcwd()
+10     csv_files = glob.glob(os.path.join(path, '*.csv'))
+11        
+12     for f in csv_files:
+13         storm = pd.read_csv(f)
+14         storm['Pressure'].plot()
+15         plt.show()
+16    
+17 def plot_all_csv_intensity():
+18     path = os.getcwd()
+19     csv_files = glob.glob(os.path.join(path, '*.csv'))
+20        
+21     for f in csv_files:
+22         storm = pd.read_csv(f)
+23         storm['Intensity'].plot()
+24         plt.show()
+\end{verbatim}
 \end{tcolorbox}
 \begin{center}
     Figure 2: python-plot-script.py
