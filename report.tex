@@ -32,7 +32,16 @@ tracking team. As a data scientist I have been tasked with extracting storm data
 maps of where the cyclones have taken place.
 \clearpage
 \section{Create CSV Script}
-Here's my script:
+\subsection{How to run script}
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
+    title=Script to run create\_csv.sh, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\hl{./create\_csv.sh <input\_kml\_file> <output\_csv\_file>}
+\begin{verbatim}
+This command runs the create_csv.sh file which takes in a kml file and extracts specific
+header tag data. The command takes extracted data and saves it to a CSV file.
+\end{verbatim}
+\end{tcolorbox}
+\subsection{Full Script}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=create\_csv.sh, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
@@ -64,10 +73,10 @@ Here's my script:
 26 #I used / to continue command on next line
     \end{verbatim}
 \end{tcolorbox}
-I will now explain my code in small boxes each in its own independent sections:
+\subsection{Script Breakdown}
+\subsubsection{Bash Initialization and Passing Arguements into a variable}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=First part of the code, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
-
     \begin{verbatim}
 1 #!/bin/bash
 2 csv_input_path=$1
@@ -79,6 +88,7 @@ tells the terminal that when you run the script it should use bash to execute it
 \hl{tmp\_csv\_output=\$2}\newline
 These two lines of code allow inputs to be enntered into the script
 \end{tcolorbox}
+\subsubsection{Using grep and sed to filter data of tag headers}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=Second part of the code, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
@@ -106,10 +116,8 @@ with an empty space including anything before the pattern.\newline
 The sed 's/[</lat>]//g' command would replace any characters between the [ ], so < / l a t >\newline
 The outcome is then appended to a file called lat.csv for later use. This same code is then run\newline
 on the rest of the tag headers Longitude, MinSeaLevelPressure and MaxIntensity.\newline
-
-
 \end{tcolorbox}
-
+\subsubsection{Adding units to the end of certain tag headers}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=Third part of the code, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
@@ -118,12 +126,12 @@ on the rest of the tag headers Longitude, MinSeaLevelPressure and MaxIntensity.\
 16 minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"
 17 maxIntensity="$(sed "s/$/ knots/" intensity.csv)"
     \end{verbatim}
-    \hl{lat="$(sed "s/$/ N/" lat.csv)"}\newline
+    \hl{lat="\$(sed "s/\$/ N/" lat.csv)"}\newline
     New variable lat is created which uses sed and adds on each line (\$) " N" from file lat.csv\newline
     This is then run on each line of code for longitude, minSeaLevelPres and maxIntensity for their\newline
     respective unit of measure.\newline
 \end{tcolorbox}
-
+\subsubsection{Outputting results to file}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=Fourth part of the code, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
@@ -136,7 +144,7 @@ This code concatenates the variables we created earlier into the file at \$2.\ne
 -d',' would add delimiter , after each of the inputs. The < allows you to use an output\newline
 of a command as if it were a file.
 \end{tcolorbox}
-
+\subsubsection{Removing temporary files from directory}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=Last part of the code, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
@@ -182,38 +190,42 @@ rm would remove the file from the current directory. It does this for all tempor
 \end{figure}
 \clearpage
 \section{Git Usage}
-
+\subsection{How to run the conflict script}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=Run Conflict Script, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 ./conflict-script.sh
 \end{verbatim}
 \end{tcolorbox}
-
+\subsection{Breakdown of how to fix the conflict}
+\subsubsection{Check currrent branch}
+First thing I did, was check to see if I was on correct branch and to see if conflict script actually ran
+I saw that python-addon was one of the branches meaning the conflict script ran.
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
-    title=Git Merge, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
-\begin{verbatim}
-git merge
-\end{verbatim}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
-    title=Git Branch, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+    fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 git branch
 \end{verbatim}
-I used git branch to check
 \end{tcolorbox}
-
+\subsubsection{Merge the python-addon branch to main branch}
+As the conflict script has already run, we were tasked with merging the python-addon branch to the main
+branch. We did this using the command below. However, when we attempted to merge the two branches a conflict occured.
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
-    title=Resolving Conflict, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
-    I used text editor in VS Code to resolve the conflict.
+    fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+git merge python-addon
+\end{verbatim}
 \end{tcolorbox}
-
+\subsubsection{Resolving the conflict}
+I opened the python-plot-script.py in my text editor of choice (VSCode) then resolved the conflict by compiling different
+parts of each scripts into one script. One of the errors was that we forgot to import math in one of the pieces of code
+which I edited. Another error was that in the function plot\_all\_csv\_pressure() one of the scripts had misspelt for and
+wrote it as fr. I picked the correct function and moved on. Lastly, the last error I changed was that one of the scripts
+was missing a whole function called plot\_all\_csv\_intensity() which I added to the combined script.
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, arc=2mm, 
     title=Git Add, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
-git add
+git commit -am "(Message)"
 \end{verbatim}
 \end{tcolorbox}
 
