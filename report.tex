@@ -27,18 +27,28 @@
 \maketitle
 
 \section{Introduction}
-As data scientists for the National Oceanographic and Atmospheric Administraiton Centre, I was assigned to the tropical cyclone
-tracking team. As a data scientist I have been tasked with extracting storm data from the tropical cyclone reports and producing
-maps of where the cyclones have taken place.
+As a data scientist for the National Oceanographic and Atmospheric Administraiton Centre, I was assigned to the tropical cyclone
+tracking team. I was tasked with extracting storm data from the tropical cyclone reports and producing maps of where the cyclones
+have taken place. 
+\newline
+\newline
+This report will talk about how I managed and cleaned the data I had been given from the tropical cyclone reports. I begun by extracting data from the
+KML files and I inputted the sorted data into a CSV file in the format that had been specified. Specific tags
+were chosen from the KML file such as Timestamp, Longitude, Latitude, Minimum Sea Level Pressure and Max Intensity.
+The report is written in LaTeX. Furthermore, I was tasked with also resolving a git conflict which I
+talk about later on in the report.
+
 \clearpage
+
 \section{Create CSV Script}
 \subsection{Introduction}
-I was tasked with extracting useful data from a set of hurrican reports.
+I was tasked with extracting specific data from a set of storm reports.
 The reports contained lots of information and I coded the \textbf{create\_csv.sh}
 script to extract the important information from the reports.
 The important information that I extracted included \textbf{Timestamp, Latitude,
 Longitude, Minimum Sea Level Pressure and MaxIntensity.}
-\subsection{How to run script}
+
+\subsection{How to run the script}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     title=Script to run create\_csv.sh, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \hl{./create\_csv.sh <input\_kml\_file> <output\_csv\_file>}
@@ -47,10 +57,11 @@ This command runs the create_csv.sh file which takes in a kml file and extracts 
 header tag data. The command takes extracted data and saves it to a CSV file.
 \end{verbatim}
 \end{tcolorbox}
+
 \subsection{Full Script}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     title=create\_csv.sh, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
-    \begin{verbatim}
+\begin{verbatim}
 1  #!/bin/bash
 2  csv_input_path=$1
 3  tmp_csv_output=$2
@@ -77,11 +88,12 @@ header tag data. The command takes extracted data and saves it to a CSV file.
 24 rm minSeaLevelPres.csv
 25 rm intensity.csv
 26 #I used / to continue command on next line
-    \end{verbatim}
+\end{verbatim}
 \end{tcolorbox}
 \begin{center}
     Figure 1: create\_csv.sh
 \end{center}
+
 \subsection{Script Breakdown}
 \subsubsection{Bash Initialization and Passing Arguements into a variable}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
@@ -95,12 +107,13 @@ header tag data. The command takes extracted data and saves it to a CSV file.
 tells the terminal that when you run the script it should use bash to execute it\newline
 \hl{csv\_input\_path=\$1}\newline
 \hl{tmp\_csv\_output=\$2}\newline
-These two lines of code allow inputs to be enntered into the script
+These two lines of code allow inputs to be entered into the script
 \end{tcolorbox}
+
 \subsubsection{Using grep and sed to filter data of tag headers}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     title=Using grep and sed to filter data of tag headers, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
-    \begin{verbatim}
+\begin{verbatim}
 5  echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
 6  dtg="$(grep -R "<dtg>" $csv_input_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"
 7  grep -R "<lat>" $csv_input_path| sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv
@@ -109,68 +122,78 @@ These two lines of code allow inputs to be enntered into the script
 10 sed 's/[</minSeaLevelPres>]//g' > minSeaLevelPres.csv
 11 grep -R "<intensity>" $csv_input_path | sed 's/.*<intensity>//g' | \ 
 12 sed 's/[</intensity>]//g' > intensity.csv
-    \end{verbatim}
+\end{verbatim}
 \hl{echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > \$tmp\_csv\_output}\newline
 This command prints the tag headers\newline
 \hl{dtg="\$(grep -R "<dtg>" \$csv\_input\_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"}\newline
-The code creates variable dtg, we grep the kml file inputted at \$1 and search recursively for\newline
-keyword <dtg>. The sed 's/.*<dtg>//g' command would replace any character and its occurences \newline
-with an empty space including anything before the pattern.\newline
-the sed 's/[</dtg>]//g' command would replace any characters between the [], so < / d t g >\newline
-to an empty character and the g stands for global.\newline
+The code creates variable dtg, we grep the kml file inputted at \$1 and this searches recursively\newline
+for keyword <dtg> and display its occurences. The sed 's/.*<dtg>//g' command would replace the\newline
+pattern <dtg> and all of its occurences with an empty space essentially deleting the characters,\newline
+this includes any characters before the pattern. The sed 's/[</dtg>]//g' command would replace\newline
+any characters between the [], so < / d t g >. All the characters replaced would become an\newline
+empty spaceessentially being deleted and the g stands for global.\newline
 \hl{grep -R "<lat>" \$csv\_input\_path | sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv}\newline
-grep recursively keyword <lat> from the kml file inputted\newline
-The sed 's/.*<dtg>//g' command would replace any character and its occurences \newline
-with an empty space including anything before the pattern.\newline
-The sed 's/[</lat>]//g' command would replace any characters between the [ ], so < / l a t >\newline
-The outcome is then appended to a file called lat.csv for later use. This same code is then run\newline
-on the rest of the tag headers Longitude, MinSeaLevelPressure and MaxIntensity.\newline
+grep recursively searches keyword <lat> from the kml file inputted and displays the occurences\newline
+of the pattern. The sed 's/.*<lat>//g' command would replace the pattern <lat> and all of its\newline
+occurences with an empty space essentially deleting the characters, this includes any characters\newline
+before the pattern. The sed 's/[</lat>]//g' command would replace any characters between the \textbf{[]},\newline
+so < / l a t >. All the characters replaced would become an empty space essentially being\newline
+deleted and the g stands for global. The outcome is then appended to a file called lat.csv\newline
+for later use. This same code is then run on the rest of the tag headers Longitude,\newline
+MinSeaLevelPressure and MaxIntensity.\newline
 \end{tcolorbox}
+
 \subsubsection{Adding units to the end of certain tag headers}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     title=Adding units to the end of certain tag headers, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
-    \begin{verbatim}
+\begin{verbatim}
 14 lat="$(sed "s/$/ N/" lat.csv)"
 15 lon="$(sed "s/$/ W/" lon.csv)"
 16 minSeaLevelPres="$(sed "s/$/ mb/" minSeaLevelPres.csv)"
 17 maxIntensity="$(sed "s/$/ knots/" intensity.csv)"
-    \end{verbatim}
-    \hl{lat="\$(sed "s/\$/ N/" lat.csv)"}\newline
-    New variable lat is created which uses sed and adds on each line (\$) " N" from file lat.csv\newline
-    This is then run on each line of code for longitude, minSeaLevelPres and maxIntensity for their\newline
-    respective unit of measure.\newline
+\end{verbatim}
+\hl{lat="\$(sed "s/\$/ N/" lat.csv)"}\newline
+New variable lat is created which uses sed and adds on each line (\$) " N" from file lat.csv\newline
+This is then run on each line of code for longitude, minSeaLevelPres and maxIntensity where each tag
+header has their respective unit of measure added to end of each line of their lines.\newline
 \end{tcolorbox}
+
 \subsubsection{Outputting results to file}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     title=Outputting results to file, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
-    \begin{verbatim}
+\begin{verbatim}
 19 paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") /
 20 <(echo "$maxIntensity") >> $tmp_csv_output
-    \end{verbatim}
+\end{verbatim}
 \hl{paste -d',' <(echo "\$dtg") <(echo "\$lat") <(echo "\$lon") <(echo "\$minSeaLevelPres") /}\newline
 \hl{<(echo "\$maxIntensity") > > \$tmp\_csv\_output}\newline
-This code concatenates the variables we created earlier into the file at \$2.\newline
--d',' would add delimiter , after each of the inputs. The < allows you to use an output\newline
-of a command as if it were a file.
+This line of code concatenates the variables we created earlier into the file at \$2.\newline
+-d',' would add a delimiter which splits different sections of the tag headers, after each of\newline
+the inputs. The < allows you to use an output of a command as if it were a file.\newline
 \end{tcolorbox}
+
 \subsubsection{Removing temporary files from directory}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     title=Removing temporary files from directory, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
-    \begin{verbatim}
+\begin{verbatim}
 22 rm lat.csv
 23 rm lon.csv
 24 rm minSeaLevelPres.csv
 25 rm intensity.csv
-    \end{verbatim}
+\end{verbatim}
 \hl{rm lat.csv}\newline
-rm would remove the file from the current directory. It does this for all temporary files created.
+rm would remove the file from the current directory. It does this for all temporary files created,\newline
+such as lon.csv, lat.csv etc.
 \end{tcolorbox}
 \clearpage
 
 
 
 \section{Storm Plots}
-\subsection{Storm Plot 1}
+Below is the extracted data from the storm plots extracted by the create\_csv.sh
+script. The extracted data is plotted on a world map and the plots are indicated by
+red circles. 
+\subsection{Storm Plot al112020}
 \begin{figure}[htbp]
     \centering
 \includegraphics{al112020.png}
@@ -179,7 +202,7 @@ rm would remove the file from the current directory. It does this for all tempor
 \end{figure}
 
 \clearpage
-\subsection{Storm Plot 2}
+\subsection{Storm Plot al012020}
 
 \begin{figure}[htbp]
     \centering
@@ -189,7 +212,7 @@ rm would remove the file from the current directory. It does this for all tempor
 \end{figure}
 
 \clearpage
-\subsection{Storm Plot 3}
+\subsection{Storm Plot al102020}
 
 \begin{figure}[htbp]
     \centering
@@ -205,6 +228,7 @@ rm would remove the file from the current directory. It does this for all tempor
 \subsection{Introduction}
 I was required to resolve a git conflict that was caused by running the command below. When attempting to merge both branches,
 a conflict was created due to the \textbf{python-plot-script.py} file being in two different branches.
+
 \subsection{How to run the conflict script}
 The command below ran the script and created a new branch called python-addon and added a file called python-plot-script.py.
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
@@ -213,6 +237,7 @@ The command below ran the script and created a new branch called python-addon an
 ./conflict-script.sh
 \end{verbatim}
 \end{tcolorbox}
+
 \subsection{Breakdown of how to fix the conflict}
 \subsubsection{Check currrent branch}
 First thing I did, was check to see if I was on correct branch and to see if conflict script actually ran
@@ -223,6 +248,7 @@ I saw that \textbf{python-addon} was one of the branches meaning the conflict sc
 git branch
 \end{verbatim}
 \end{tcolorbox}
+
 \subsubsection{Merge the python-addon branch to main branch}
 As the conflict script has already run, we were tasked with merging the \textbf{python-addon} branch to the main
 branch. We did this using the command below. However, when we attempted to merge the two branches a conflict occured.
@@ -232,12 +258,14 @@ branch. We did this using the command below. However, when we attempted to merge
 git merge python-addon
 \end{verbatim}
 \end{tcolorbox}
+
 \subsubsection{Resolving the conflict}
 I opened the \textbf{python-plot-script.py} in my text editor of choice (VSCode) then resolved the conflict by compiling different
 parts of each scripts into one script. One of the errors was that we forgot to import math in one of the pieces of code
 which I edited. Another error was that in the function \textbf{plot\_all\_csv\_pressure()} one of the scripts had misspelt for and
 wrote it as fr. I picked the correct function and moved on. Lastly, the last error I changed was that one of the scripts
 was missing a whole function called \textbf{plot\_all\_csv\_intensity()} which I added to the combined script.
+
 \subsubsection{Adding resolved file}
 After resolving the conflict, I used the command below to add a change in the working directory to the staging area.
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
@@ -245,8 +273,10 @@ After resolving the conflict, I used the command below to add a change in the wo
 \begin{verbatim}
 git add python-plot-script.py
 \end{verbatim}
-\clearpage
 \end{tcolorbox}
+
+\clearpage
+
 \subsubsection{Commititting the changes}
 Committing the changes would save the changes to the local repository. I committed this with an appopriate message about how the
 branches have been merged.
@@ -256,6 +286,7 @@ branches have been merged.
 git commit -am "Merge branch 'python-addon'"
 \end{verbatim}
 \end{tcolorbox}
+
 \subsubsection{Pushing Changes to Remote Repository}
 I uploaded my local repository content to the remote repository 
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
@@ -264,6 +295,7 @@ I uploaded my local repository content to the remote repository
 git push origin main
 \end{verbatim}
 \end{tcolorbox}
+
 \subsection{Final Merged Script}
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
     title=python-plot-script.py, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
@@ -297,5 +329,4 @@ git push origin main
 \begin{center}
     Figure 2: python-plot-script.py
 \end{center}
-
 \end{document}
