@@ -49,7 +49,7 @@ The important information that I extracted included \textbf{Timestamp, Latitude,
 Longitude, Minimum Sea Level Pressure and MaxIntensity.}
 
 \subsection{How to run the script}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
     title=Script to run create\_csv.sh, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \hl{./create\_csv.sh <input\_kml\_file> <output\_csv\_file>}
 \begin{verbatim}
@@ -59,7 +59,7 @@ header tag data. The command takes extracted data and saves it to a CSV file.
 \end{tcolorbox}
 
 \subsection{Full Script}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
     title=create\_csv.sh, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 1  #!/bin/bash
@@ -96,7 +96,7 @@ header tag data. The command takes extracted data and saves it to a CSV file.
 
 \subsection{Script Breakdown}
 \subsubsection{Bash Initialization and Passing Arguements into a variable}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
     title=Bash Initialization and Passing Arguements into a variable, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
     \begin{verbatim}
 1 #!/bin/bash
@@ -111,7 +111,7 @@ These two lines of code allow inputs to be entered into the script
 \end{tcolorbox}
 
 \subsubsection{Using grep and sed to filter data of tag headers}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
     title=Using grep and sed to filter data of tag headers, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 5  echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > $tmp_csv_output
@@ -124,19 +124,19 @@ These two lines of code allow inputs to be entered into the script
 12 sed 's/[</intensity>]//g' > intensity.csv
 \end{verbatim}
 \hl{echo "Timestamp,Latitude,Longitude,MinSeaLevelPressure,MaxIntensity" > \$tmp\_csv\_output}\newline
-This command prints the tag headers\newline
+This command prints the tag headers and outputs it to the tmp\_csv\_output file.\newline
 \hl{dtg="\$(grep -R "<dtg>" \$csv\_input\_path | sed 's/.*<dtg>//g' | sed 's/[</dtg>]//g')"}\newline
 The code creates variable dtg, we grep the kml file inputted at \$1 and this searches recursively\newline
 for keyword <dtg> and display its occurences. The sed 's/.*<dtg>//g' command would replace the\newline
-pattern <dtg> and all of its occurences with an empty space essentially deleting the characters,\newline
+pattern <dtg> and all of its occurences with nothing essentially deleting the characters,\newline
 this includes any characters before the pattern. The sed 's/[</dtg>]//g' command would replace\newline
-any characters between the [], so < / d t g >. All the characters replaced would become an\newline
+any pattern between the [], so < / d t g >. All the characters replaced would become an\newline
 empty spaceessentially being deleted and the g stands for global.\newline
 \hl{grep -R "<lat>" \$csv\_input\_path | sed 's/.*<lat>//g' | sed 's/[</lat>]//g' > lat.csv}\newline
 grep recursively searches keyword <lat> from the kml file inputted and displays the occurences\newline
 of the pattern. The sed 's/.*<lat>//g' command would replace the pattern <lat> and all of its\newline
-occurences with an empty space essentially deleting the characters, this includes any characters\newline
-before the pattern. The sed 's/[</lat>]//g' command would replace any characters between the \textbf{[]},\newline
+occurences with nothing essentially deleting the characters, this includes any characters\newline
+before the pattern. The sed 's/[</lat>]//g' command would replace any pattern between the \textbf{[]},\newline
 so < / l a t >. All the characters replaced would become an empty space essentially being\newline
 deleted and the g stands for global. The outcome is then appended to a file called lat.csv\newline
 for later use. This same code is then run on the rest of the tag headers Longitude,\newline
@@ -144,7 +144,7 @@ MinSeaLevelPressure and MaxIntensity.\newline
 \end{tcolorbox}
 
 \subsubsection{Adding units to the end of certain tag headers}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt,
     title=Adding units to the end of certain tag headers, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 14 lat="$(sed "s/$/ N/" lat.csv)"
@@ -159,7 +159,7 @@ header has their respective unit of measure added to end of each line of their l
 \end{tcolorbox}
 
 \subsubsection{Outputting results to file}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt,
     title=Outputting results to file, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 19 paste -d',' <(echo "$dtg") <(echo "$lat") <(echo "$lon") <(echo "$minSeaLevelPres") /
@@ -173,7 +173,7 @@ the inputs. The < allows you to use an output of a command as if it were a file.
 \end{tcolorbox}
 
 \subsubsection{Removing temporary files from directory}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
     title=Removing temporary files from directory, width=6.7in, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 22 rm lat.csv
@@ -231,7 +231,7 @@ a conflict was created due to the \textbf{python-plot-script.py} file being in t
 
 \subsection{How to run the conflict script}
 The command below ran the script and created a new branch called python-addon and added a file called python-plot-script.py.
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 ./conflict-script.sh
@@ -242,7 +242,7 @@ The command below ran the script and created a new branch called python-addon an
 \subsubsection{Check currrent branch}
 First thing I did, was check to see if I was on correct branch and to see if conflict script actually ran
 I saw that \textbf{python-addon} was one of the branches meaning the conflict script ran.
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt,
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 git branch
@@ -252,7 +252,7 @@ git branch
 \subsubsection{Merge the python-addon branch to main branch}
 As the conflict script has already run, we were tasked with merging the \textbf{python-addon} branch to the main
 branch. We did this using the command below. However, when we attempted to merge the two branches a conflict occured.
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt,
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 git merge python-addon
@@ -260,15 +260,69 @@ git merge python-addon
 \end{tcolorbox}
 
 \subsubsection{Resolving the conflict}
-I opened the \textbf{python-plot-script.py} in my text editor of choice (VSCode) then resolved the conflict by compiling different
+I opened the \textbf{python-plot-script.py} in Visual Studio Code then resolved the conflict by compiling different
 parts of each scripts into one script. One of the errors was that we forgot to import math in one of the pieces of code
 which I edited. Another error was that in the function \textbf{plot\_all\_csv\_pressure()} one of the scripts had misspelt for and
 wrote it as fr. I picked the correct function and moved on. Lastly, the last error I changed was that one of the scripts
 was missing a whole function called \textbf{plot\_all\_csv\_intensity()} which I added to the combined script.
 
+\subsubsection{Conflict with readme file}
+Upon completion, I attempted to merge the scripts again but an error appeared saying that there was still a conflict with the readme file.
+I attempted to delete the readme file from the file explorer. Before deleting the readme.txt file I saved a back up just in case. Again, I tried
+to merge the files and the error appeared again.
+
+
+\subsubsection{Reverting to older version}
+UpoAt this point I didn't know what to do as even after deleting the readme file I couldn't get anywhere.
+I decided to revert back to an older version to when the readme didn't cause an issue. In order to revert to
+an older version, I had to check my git logs and find the code of which commit I wanted to go back to. I found
+the commit and went back to the "Finished create\_csv.sh added functionality to display units" commit.
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
+    fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+git revert 345f39a9
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{Updating project after revert}
+After the revert was completed, I decided to update the project by using the command below. This takes the latest state
+of the main branch and committed the changes I made.
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
+    fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+git rebase origin main
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{Removing the python-addon branch as it wasn't removed}
+After checking the branches one last time I saw that even after the revert, the
+python-addon branch was still a visible branch. In order to overcome this I ran the code below to remove it.
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
+    fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+git branch --delete readme.txt
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{Running conflict script again and resolving the error}
+After deleting the python-addon branch, I re-ran the conflict script and gained the same conflict.
+I resolve it but this time adding the import math and made sure not to miss anything.
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
+    fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+./conflict-script.sh
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{Restoring report.tex and create\_csv.sh codes}
+After attempting to add more to my report.tex file and removing some of the unnecessary comments I made in
+my create\_csv.sh file I saw that I had reverted too far back and had a very old version of my code that
+couldn't run as it was incorrect. When I saw this I decided to use my local backup that I stored and replaced both
+report.tex and create\_csv.sh files with the correct versions
+
 \subsubsection{Adding resolved file}
 After resolving the conflict, I used the command below to add a change in the working directory to the staging area.
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt,
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 git add python-plot-script.py
@@ -280,7 +334,7 @@ git add python-plot-script.py
 \subsubsection{Commititting the changes}
 Committing the changes would save the changes to the local repository. I committed this with an appopriate message about how the
 branches have been merged.
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 git commit -am "Merge branch 'python-addon'"
@@ -289,7 +343,7 @@ git commit -am "Merge branch 'python-addon'"
 
 \subsubsection{Pushing Changes to Remote Repository}
 I uploaded my local repository content to the remote repository 
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt,
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 git push origin main
@@ -297,7 +351,7 @@ git push origin main
 \end{tcolorbox}
 
 \subsection{Final Merged Script}
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, arc=2mm, 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt,
     title=python-plot-script.py, fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
 1  import pandas as pd
