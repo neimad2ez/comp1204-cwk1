@@ -261,22 +261,41 @@ git merge python-addon
 
 \subsubsection{Resolving the conflict}
 I opened the \textbf{python-plot-script.py} in Visual Studio Code then resolved the conflict by compiling different
-parts of each scripts into one script. One of the errors was that we forgot to import math in one of the pieces of code
-which I edited. Another error was that in the function \textbf{plot\_all\_csv\_pressure()} one of the scripts had misspelt for and
+parts of each scripts into one script. An error was that in the function \textbf{plot\_all\_csv\_pressure()} one of the scripts had misspelt for and
 wrote it as fr. I picked the correct function and moved on. Lastly, the last error I changed was that one of the scripts
 was missing a whole function called \textbf{plot\_all\_csv\_intensity()} which I added to the combined script.
 
-\subsubsection{Conflict with readme file}
-Upon completion, I attempted to merge the scripts again but an error appeared saying that there was still a conflict with the readme file.
-I attempted to delete the readme file from the file explorer. Before deleting the readme.txt file I saved a back up just in case. Again, I tried
-to merge the files and the error appeared again.
+\subsubsection{Realising that I had forgotten a part in my python-plot-script.py}
+After attempting to review what I did and looking over the code again, I had just merged, I realised I had missed an import. The code was all correct
+apart from missing a part of the code \textbf{import math}. As a result, I decided to revert to the commit right before I solved the conflict in order to do the conflict again.
 
+\subsubsection{Conflict with readme file}
+When trying to revert to the commit right before, I had a conflict with the readme file.
+I attempted to delete the readme to avoid the conflict. I deleted the readme file with the command below.
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
+    fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+git delete readme.txt
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{Continual conflicts with the readme file}
+When trying to use the command below, I kept getting a conflict message. I realised that even after deleting the readme file through git
+and file explorer, it would keep appearing. I decided to revert back to a commit where this error didn't occur, I updated the latest version to the reverted version
+using the command below and saved a local
+backup of the version I currently had, just in case something went wrong. 
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
+    fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
+\begin{verbatim}
+git rebase
+\end{verbatim}
+\end{tcolorbox}
 
 \subsubsection{Reverting to older version}
-UpoAt this point I didn't know what to do as even after deleting the readme file I couldn't get anywhere.
-I decided to revert back to an older version to when the readme didn't cause an issue. In order to revert to
-an older version, I had to check my git logs and find the code of which commit I wanted to go back to. I found
-the commit and went back to the "Finished create\_csv.sh added functionality to display units" commit.
+In order to revert to a previous version where the readme file wasn't giving me conflicts, I checked my git logs.
+From there, I found the commit which sounded best to revert back to. I found the commit message code and entered the following code
+below to go back to the old commit. The old commit I went back to was called "Finished create\_csv.sh added functionality to display units".
+I then reverted back to a way older version to when the readme didn't cause me an issue.
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
@@ -284,29 +303,19 @@ git revert 345f39a9
 \end{verbatim}
 \end{tcolorbox}
 
-\subsubsection{Updating project after revert}
-After the revert was completed, I decided to update the project by using the command below. This takes the latest state
-of the main branch and committed the changes I made.
-\begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
-    fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
-\begin{verbatim}
-git rebase origin main
-\end{verbatim}
-\end{tcolorbox}
-
 \subsubsection{Removing the python-addon branch as it wasn't removed}
-After checking the branches one last time I saw that even after the revert, the
-python-addon branch was still a visible branch. In order to overcome this I ran the code below to remove it.
+After reverting, I checked my branches and I saw that even after the revert, the
+\textbf{python-addon} branch was still a visible branch. In order to overcome this I ran the code below to remove it.
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
-git branch --delete readme.txt
+git branch --delete python-addon
 \end{verbatim}
 \end{tcolorbox}
 
 \subsubsection{Running conflict script again and resolving the error}
 After deleting the python-addon branch, I re-ran the conflict script and gained the same conflict.
-I resolve it but this time adding the import math and made sure not to miss anything.
+I resolved it with the same changes I made previously but this time adding the \textbf{import math}, making sure not to miss anything.
 \begin{tcolorbox}[colback=white, colframe=black, boxrule=1pt, 
     fonttitle=\bfseries, listing only, listing options={language=sh, basicstyle=\ttfamily}]
 \begin{verbatim}
@@ -315,10 +324,10 @@ I resolve it but this time adding the import math and made sure not to miss anyt
 \end{tcolorbox}
 
 \subsubsection{Restoring report.tex and create\_csv.sh codes}
-After attempting to add more to my report.tex file and removing some of the unnecessary comments I made in
-my create\_csv.sh file I saw that I had reverted too far back and had a very old version of my code that
+After attempting to add more to my \textbf{report.tex} file and removing some of the unnecessary comments I made in
+my \textbf{create\_csv.sh} file, I saw that I had reverted too far back and had a very old version of my code that
 couldn't run as it was incorrect. When I saw this I decided to use my local backup that I stored and replaced both
-report.tex and create\_csv.sh files with the correct versions
+\textbf{report.tex} and \textbf{create\_csv.sh} files with the correct versions
 
 \subsubsection{Adding resolved file}
 After resolving the conflict, I used the command below to add a change in the working directory to the staging area.
